@@ -1,0 +1,274 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400000}
+  - component: {fileID: 11400006}
+  - component: {fileID: 11438016}
+  - component: {fileID: 11433292}
+  - component: {fileID: 11449990}
+  - component: {fileID: 114050932595883750}
+  - component: {fileID: 114632466562197050}
+  - component: {fileID: 114329977185947458}
+  - component: {fileID: 114658217394070590}
+  - component: {fileID: 4131820461706492887}
+  - component: {fileID: 2058680046939666499}
+  - component: {fileID: 1905962857241199156}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6439f4fa7a2f54aaaeb2ab07213880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11438016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8a02fcf16d466428e9b2a6c0923124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11433292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550f458296d73394f9a24eb86339091e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisconnectDialogue: {fileID: 22454346, guid: 1f2daa46a9ad7bf44a68c85473bd262a, type: 3}
+  ConnectOnline: 0
+  Host: localhost
+--- !u!114 &11449990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f9fafc72047e9419604f25afe390b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_serverFrameRate: 60
+  m_serverFramesPerSync: 2
+  m_clientSendRate: 60
+  m_recoverUpdateTime: 1
+  m_applyServerTimeScale: 0
+  m_playersVisible: 1
+  m_allowPlayerSpawning: 0
+  m_enableUDPClientFrames: 0
+  m_playerLimit: 64
+  m_defaultEntityPredictor: {fileID: 11400000, guid: 5c900b3f111f7cc41b666c27af541870,
+    type: 2}
+  m_defaultEntityControllerPredictor: {fileID: 11400000, guid: 03a8e2d3d7f1ccf45a8b061672cb4fef,
+    type: 2}
+  m_defaultRoomPredictor: {fileID: 0}
+  m_defaultPlayerPredictor: {fileID: 0}
+  TransformPrecisionOverrides:
+    Position: 0.001
+    Rotation: 0.0001
+    Scale: 0.01
+  m_clusterReconnectDelay: 10
+  m_shutdownWithoutCluster: 0
+  m_clusterReconnectAttempts: 3
+  m_requiredCoreCount: 0.5
+  m_requiredMemory: 0.5
+  m_physicsThreads: 4
+  m_networkThreads: 4
+  m_encodingThreads: 4
+  m_maxConcurrentAuthentications: 4
+  m_parallelControllerUpdates: 0
+  m_parallelOwnedEntityUpdates: 0
+  m_port: 8000
+--- !u!114 &114050932595883750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b42dac6f5529747a8f8001ec2efd54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_teamWinScore: 1000
+  m_playerWinScore: 400
+  m_gameTimeMinutes: 30
+  m_resetTime: 5
+  NumberOfTeams: 0
+--- !u!114 &114632466562197050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4249548ba5bf8c84b9fd2e1ecfa2ec84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_asteroidPrefabs:
+  - asteroid1_1
+  - asteroid2_1
+  - asteroid3_1
+  - asteroid4_1
+  - asteroid5_1
+  - asteroid6_1
+  - asteroid7_1
+  - asteroid8_1
+  m_asteroidScales:
+  - 0.6
+  - 1
+  - 2
+  - 4
+  m_numAsteroids: 400
+  m_asteroidPlacementMinorRadius: 42.5
+  m_asteroidPlacementMajorRadius: 100
+  m_asteroidClumps: 7
+  m_asteroidClumpChance: 0.7
+  m_asteroidClumpRadius: 13
+  m_minAsteroidVelocity: 0
+  m_maxAsteroidVelocity: 0.1
+  m_minAsteroidAngularVelocity: 0.5
+  m_maxAsteroidAngularVelocity: 6
+  m_asteroidBaseMass: 50
+  m_largeAsteroidChance: 0.05
+  m_cloudPrefabs:
+  - dustCloud1
+  - dustCloud2
+  - dustCloud3
+  m_cloudAmount: 8
+  m_cloudPlacementMinorRadius: 50
+  m_cloudPlacementMajorRadius: 100
+--- !u!114 &114329977185947458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77bb2202ab84f746a36a13f710d7533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114658217394070590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd425d913d2552b4da7bf5b95c2d83e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4131820461706492887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c95d5da26734d4b994e9ef8d69d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Controller: {fileID: 11400000, guid: ffe5a7b2c9d46e74495004fb76622a97, type: 2}
+  m_deathScorePenalty: -5
+  m_respawnTime: 5
+--- !u!114 &2058680046939666499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6250f9bf8de3ce44e96c28443c222267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playerType: 3
+--- !u!114 &1905962857241199156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc28043044ad1994785f539458df6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gravity: {x: 0, y: -9.81, z: 0}
+  m_bounceThreshold: 2
+  m_queryHitBackFaces: 0
+  m_enableAdaptiveForce: 0
+  m_enableEnhancedDeterminism: 0
+  AutoSync: 1
+  m_solverType: 0
+  DefaultCollisionFilter: {fileID: 11400000, guid: b385cdd70baeda04183abb857cd5407e,
+    type: 2}
+  DefaultMaterial: {fileID: 0}
+  DefaultEntityPhysics:
+    ContactOffset: 0.01
+    SleepThreshold: 0.005
+    MaxLinearSpeed: 1000
+    MaxAngularSpeed: 50000
+    MaxDepenetrationSpeed: 1000
+    PositionIterations: 6
+    VelocityIterations: 1
+    m_rigidBodyMode: 0
+  m_usePhysXVisualDebugger: 0
+  m_pvdAddress: 127.0.0.1
+  m_pvdPort: 5425

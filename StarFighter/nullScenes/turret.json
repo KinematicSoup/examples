@@ -1,0 +1,8 @@
+{
+	"rooms":{
+		"GameController":{
+			"prefab":"GameController"
+		}
+	},
+	"entities":[]
+}

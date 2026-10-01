@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1590657916187908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4904780285426846}
+  - component: {fileID: 64156622449248316}
+  - component: {fileID: 114070810269959312}
+  - component: {fileID: 8910616436900011089}
+  m_Layer: 0
+  m_Name: platformEmitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4904780285426846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590657916187908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &64156622449248316
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590657916187908}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 27b0447a3946f3f4ab57ea9cd5dcea1d, type: 3}
+--- !u!114 &114070810269959312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590657916187908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee06f2f9480b8674880fcaa5a0eaa08d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionFilter: {fileID: 0}
+  PhysicsMaterial: {fileID: 0}
+  m_isPermanent: 1
+  DestroyWithServer: 1
+  DestroyOnOwnerDisconnect: 1
+  SyncGroup: 0
+  OverridePredictor: 0
+  Predictor: {fileID: 0}
+  OverrideControllerPredictor: 0
+  ControllerPredictor: {fileID: 0}
+  RigidBodyExistence: 0
+  PhysicsOverrides:
+    ContactOffset: -1
+    SleepThreshold: -1
+    MaxLinearSpeed: -1
+    MaxAngularSpeed: -1
+    MaxDepenetrationSpeed: -1
+    PositionIterations: -1
+    VelocityIterations: -1
+    m_rigidBodyMode: -1
+  TransformPrecisionOverrides:
+    Position: -1
+    Rotation: -1
+    Scale: -1
+  AssetId: 23
+  EntityId: 0
+  Type: GameObjects/Platform/Parts/platformEmitter
+  IsStatic: 1
+--- !u!114 &8910616436900011089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590657916187908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13342b674cf94bb4c9c9a59fdebe6613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Collider: {fileID: 64156622449248316}
+  ShapeId: 16
+  Existence: 0
+  IsSimulation: 1
+  IsQuery: 1
+  Filter: {fileID: 0}
+  ContactOffset: -1

@@ -179,7 +179,7 @@ namespace MatchMakerSample.Server
             }
 
             // Set the username on the player script.
-            player.Scripts.Get<spPlayerMatchData>().Name = args[0];
+            player.Scripts.Get<spPlayerMatchData>().Name = name;
             return Task.FromResult(new ksAuthenticationResult(0));
         }
 

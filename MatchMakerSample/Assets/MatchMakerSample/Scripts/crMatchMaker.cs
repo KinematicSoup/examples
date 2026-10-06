@@ -81,7 +81,7 @@ namespace MatchMakerSample.Client
             // If we're in the COUNTDOWN state, update the countdown.
             if (m_state == States.COUNTDOWN && m_countdown > 1f)
             {
-                m_countdown -= Time.Delta;
+                m_countdown -= Time.ProcessedServerUnscaledDelta;
                 // Don't let the countdown go below 1. The server will send an RPC to change the message to say the game
                 // is starting when it reaches zero.
                 m_countdown = Mathf.Max(1f, m_countdown);

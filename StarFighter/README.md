@@ -21,5 +21,4 @@ the server config files and cannot be changed in game. To play with teams, set t
 the GameManager script on the GameController object in the Arena scene to a value greater than 1.
 
 ### Licence
-You are free to use the code from this sample project in your own games. The music is creative commons and can be used freely
-in your own projects. All other art assets are proprietary to KinematicSoup Technologies Inc and are protected by copyright.
+See LICENSE.MD

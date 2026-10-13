@@ -3,7 +3,7 @@
 This project is up to date with:
 
 Reactor version: 1.1.3+3
-Unity version: 6.1
+Unity version: 6.3
 
 ### About This Demo
 Star Fighter is a space shooter where players can play as a fighter ship, or as turret that is attached to a fighter ship

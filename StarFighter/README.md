@@ -2,8 +2,18 @@
 
 This project is up to date with:
 
-Reactor Multiplayer Engine version: 1.1.3+3
+Reactor Multiplayer Engine version: 1.1.3+3 
+
 Unity version: 6.3
+
+### Getting Started
+
+* Check out this project, open it in Unity 6.3.
+* Install Reactor Multiplayer Engine from [https://www.kinematicsoup.com/](https://www.kinematicsoup.com/reactor/install/)
+* Open the scene file Assets/Scenes/arena.unity
+* Go the Reactor menu, select "Rebuild All"
+* Click the `GameController` object in the hierarchy, go to the `ksRoomInfo` component, and click "Start Local Server".
+* Enter play mode
 
 ### About This Demo
 Star Fighter is a space shooter where players can play as a fighter ship, or as turret that is attached to a fighter ship

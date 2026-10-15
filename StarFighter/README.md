@@ -2,13 +2,14 @@
 
 This project is up to date with:
 
-Reactor version: 1.1.3+3
+Reactor Multiplayer Engine version: 1.1.3+3
 Unity version: 6.3
 
 ### About This Demo
 Star Fighter is a space shooter where players can play as a fighter ship, or as turret that is attached to a fighter ship
 controlled by another player. There must be at least one other player playing as a fighter ship with an unoccupied turret
-for you to play as a turret.
+for you to play as a turret. It uses Reactor Multiplayer Engine which provides efficient syncing and server-authoritative 
+physics simulation.
 
 ### Scenes
 There are two scenes used in Star Figther, all found under the Assets/Scenes folder:

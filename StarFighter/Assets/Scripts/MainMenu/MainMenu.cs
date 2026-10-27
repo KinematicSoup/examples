@@ -424,7 +424,7 @@ public class MainMenu : MonoBehaviour
     public void OpenRebindMenu(InputButton button, InputAxis axis)
     {
         string command = (button != null) ? button.Name : axis.Name;
-        string controls = ((button != null) ? button.PcButton.ToString() : axis.MouseAxis.Name) + " / " + ((button != null) ? button.JoystickButton.Name : axis.JoystickAxis.Name);
+        string controls = ((button != null) ? button.PcName : axis.MouseAxis.Name) + " / " + ((button != null) ? button.JoystickButton.Name : axis.JoystickAxis.Name);
 
         TextRebind.text = "Do you wish to rebind the controls for <color=#ffffffff>" + command + "</color> from <color=#ffffffff>" + controls + "</color> ?";
 

@@ -61,23 +61,23 @@ public class Controls : MonoBehaviour
         m_buttons.Clear();
         m_axis.Clear();
 
-        m_buttons.Add(new InputButton(GameButton.MENU,              "Back to Menu",         KeyCode.Escape,         GamePad.Button.START));
-        m_buttons.Add(new InputButton(GameButton.SCORES,            "Show Scores",          KeyCode.Tab,            GamePad.Button.BACK));
-        m_buttons.Add(new InputButton(GameButton.CHAT,              "Chat",                 KeyCode.Return,         GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.CLOSE_CHAT,         "Close Chat",           KeyCode.RightShift,     GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.UNLOCK_CURSOR,      "Free Cursor",          KeyCode.LeftControl,    GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.PRIMARY_FIRE,       "Primary Fire",         KeyCode.Mouse0,         GamePad.Button.R_TRIGGER));
-        m_buttons.Add(new InputButton(GameButton.SECONDARY_FIRE,     "Secondary Fire",       KeyCode.Mouse1,         GamePad.Button.L_TRIGGER));
-        m_buttons.Add(new InputButton(GameButton.SHIELD,            "Toggle Shield",        KeyCode.LeftShift,      GamePad.Button.A));
-        m_buttons.Add(new InputButton(GameButton.FORWARD,           "Forward",              KeyCode.W,              GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.REVERSE,           "Reverse",              KeyCode.S,              GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.ROLL_LEFT,          "Roll Left",            KeyCode.Q,              GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.ROLL_RIGHT,         "Roll Right",           KeyCode.E,              GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.STRAFE_LEFT,        "Strafe Left",          KeyCode.A,              GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.STRAFE_RIGHT,       "Strafe Right",         KeyCode.D,              GamePad.Button.NONE));
-        m_buttons.Add(new InputButton(GameButton.BOOST,             "Speed Boost",          KeyCode.Space,          GamePad.Button.L_STICK));
-        m_buttons.Add(new InputButton(GameButton.LOOK_BACK,          "Look Behind",          KeyCode.X,              GamePad.Button.L_SHOULDER));
-        m_buttons.Add(new InputButton(GameButton.TURRET_AIM,         "Turret Zoom Toggle",   KeyCode.W,              GamePad.Button.DPAD_UP));
+        m_buttons.Add(new InputButton(GameButton.MENU,              "Back to Menu",         Key.Escape,             InputButton.MouseBinding.NONE,   GamePad.Button.START));
+        m_buttons.Add(new InputButton(GameButton.SCORES,            "Show Scores",          Key.Tab,                InputButton.MouseBinding.NONE,   GamePad.Button.BACK));
+        m_buttons.Add(new InputButton(GameButton.CHAT,              "Chat",                 Key.Enter,              InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.CLOSE_CHAT,         "Close Chat",           Key.RightShift,         InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.UNLOCK_CURSOR,      "Free Cursor",          Key.LeftCtrl,           InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.PRIMARY_FIRE,       "Primary Fire",         Key.None,               InputButton.MouseBinding.LEFT,   GamePad.Button.R_TRIGGER));
+        m_buttons.Add(new InputButton(GameButton.SECONDARY_FIRE,     "Secondary Fire",       Key.None,               InputButton.MouseBinding.RIGHT,  GamePad.Button.L_TRIGGER));
+        m_buttons.Add(new InputButton(GameButton.SHIELD,            "Toggle Shield",        Key.LeftShift,          InputButton.MouseBinding.NONE,   GamePad.Button.A));
+        m_buttons.Add(new InputButton(GameButton.FORWARD,           "Forward",              Key.W,                  InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.REVERSE,           "Reverse",              Key.S,                  InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.ROLL_LEFT,          "Roll Left",            Key.Q,                  InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.ROLL_RIGHT,         "Roll Right",           Key.E,                  InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.STRAFE_LEFT,        "Strafe Left",          Key.A,                  InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.STRAFE_RIGHT,       "Strafe Right",         Key.D,                  InputButton.MouseBinding.NONE,   GamePad.Button.NONE));
+        m_buttons.Add(new InputButton(GameButton.BOOST,             "Speed Boost",          Key.Space,              InputButton.MouseBinding.NONE,   GamePad.Button.L_STICK));
+        m_buttons.Add(new InputButton(GameButton.LOOK_BACK,          "Look Behind",          Key.X,                  InputButton.MouseBinding.NONE,   GamePad.Button.L_SHOULDER));
+        m_buttons.Add(new InputButton(GameButton.TURRET_AIM,         "Turret Zoom Toggle",   Key.W,                  InputButton.MouseBinding.NONE,   GamePad.Button.DPAD_UP));
 
         m_axis.Add(new InputAxis(GameAxis.YAW,          "Turn Left/Right",      InputAxis.Mouse.Axis.MOUSE_X,       GamePad.Axis.R_STICK_X));
         m_axis.Add(new InputAxis(GameAxis.PITCH,        "Turn Up/Down",         InputAxis.Mouse.Axis.MOUSE_Y,       GamePad.Axis.R_STICK_Y));
@@ -173,10 +173,21 @@ public class Controls : MonoBehaviour
 
         if (m_assignButton != null)
         {
-            KeyCode key = FindKey();
-            if (key != KeyCode.None)
+            Key key = FindKey();
+            if (key != Key.None)
             {
                 m_assignButton.PcButton = key;
+                m_assignButton.PcMouseButton = InputButton.MouseBinding.NONE;
+                m_assignButton = null;
+                m_isRebinding = false;
+                return;
+            }
+
+            InputButton.MouseBinding mouseButton = FindMouseButton();
+            if (mouseButton != InputButton.MouseBinding.NONE)
+            {
+                m_assignButton.PcButton = Key.None;
+                m_assignButton.PcMouseButton = mouseButton;
                 m_assignButton = null;
                 m_isRebinding = false;
                 return;
@@ -238,7 +249,8 @@ public class Controls : MonoBehaviour
      */
     public static void ClearControl(InputButton button)
     {
-        button.PcButton = KeyCode.None;
+        button.PcButton = Key.None;
+        button.PcMouseButton = InputButton.MouseBinding.NONE;
         button.JoystickButton.Button = GamePad.Button.NONE;
     }
 
@@ -254,10 +266,11 @@ public class Controls : MonoBehaviour
     /*
      * instantly sets a gameButton to a specified control
      */
-    public static void AssignControl(GameButton gameButton, KeyCode pcButton, GamePad.Button joystickButton)
+    public static void AssignControl(GameButton gameButton, Key pcButton, InputButton.MouseBinding pcMouseButton, GamePad.Button joystickButton)
     {
         InputButton button = GetButton(gameButton);
         button.PcButton = pcButton;
+        button.PcMouseButton = pcMouseButton;
         button.JoystickButton.Button = joystickButton;
     }
 
@@ -272,36 +285,11 @@ public class Controls : MonoBehaviour
     }
 
     /*
-     * returns the first active pc keycode
+     * returns the first active keyboard key
      * returns None if nothing is found
      */
-    private static KeyCode FindKey()
+    private static Key FindKey()
     {
-        Mouse mouse = Mouse.current;
-        if (mouse != null)
-        {
-            if (mouse.leftButton.wasPressedThisFrame)
-            {
-                return KeyCode.Mouse0;
-            }
-            if (mouse.rightButton.wasPressedThisFrame)
-            {
-                return KeyCode.Mouse1;
-            }
-            if (mouse.middleButton.wasPressedThisFrame)
-            {
-                return KeyCode.Mouse2;
-            }
-            if (mouse.forwardButton.wasPressedThisFrame)
-            {
-                return KeyCode.Mouse3;
-            }
-            if (mouse.backButton.wasPressedThisFrame)
-            {
-                return KeyCode.Mouse4;
-            }
-        }
-
         Keyboard keyboard = Keyboard.current;
         if (keyboard != null)
         {
@@ -311,59 +299,43 @@ public class Controls : MonoBehaviour
                 {
                     continue;
                 }
-
-                KeyCode keyCode = ConvertInputSystemKeyToKeyCode(control.keyCode);
-                if (keyCode != KeyCode.None)
-                {
-                    return keyCode;
-                }
+                return control.keyCode;
             }
         }
 
-        return KeyCode.None;
+        return Key.None;
     }
 
-    private static KeyCode ConvertInputSystemKeyToKeyCode(Key key)
+    private static InputButton.MouseBinding FindMouseButton()
     {
-        switch (key)
+        Mouse mouse = Mouse.current;
+        if (mouse == null)
         {
-            case Key.Enter: return KeyCode.Return;
-            case Key.NumpadEnter: return KeyCode.KeypadEnter;
-            case Key.LeftCtrl: return KeyCode.LeftControl;
-            case Key.RightCtrl: return KeyCode.RightControl;
-            case Key.LeftMeta: return KeyCode.LeftCommand;
-            case Key.RightMeta: return KeyCode.RightCommand;
-            case Key.Digit0: return KeyCode.Alpha0;
-            case Key.Digit1: return KeyCode.Alpha1;
-            case Key.Digit2: return KeyCode.Alpha2;
-            case Key.Digit3: return KeyCode.Alpha3;
-            case Key.Digit4: return KeyCode.Alpha4;
-            case Key.Digit5: return KeyCode.Alpha5;
-            case Key.Digit6: return KeyCode.Alpha6;
-            case Key.Digit7: return KeyCode.Alpha7;
-            case Key.Digit8: return KeyCode.Alpha8;
-            case Key.Digit9: return KeyCode.Alpha9;
-            case Key.Numpad0: return KeyCode.Keypad0;
-            case Key.Numpad1: return KeyCode.Keypad1;
-            case Key.Numpad2: return KeyCode.Keypad2;
-            case Key.Numpad3: return KeyCode.Keypad3;
-            case Key.Numpad4: return KeyCode.Keypad4;
-            case Key.Numpad5: return KeyCode.Keypad5;
-            case Key.Numpad6: return KeyCode.Keypad6;
-            case Key.Numpad7: return KeyCode.Keypad7;
-            case Key.Numpad8: return KeyCode.Keypad8;
-            case Key.Numpad9: return KeyCode.Keypad9;
-            case Key.NumLock: return KeyCode.Numlock;
-            case Key.PrintScreen: return KeyCode.Print;
-            case Key.ContextMenu: return KeyCode.Menu;
+            return InputButton.MouseBinding.NONE;
         }
 
-        KeyCode parsed;
-        if (Enum.TryParse(key.ToString(), true, out parsed))
+        if (mouse.leftButton.wasPressedThisFrame)
         {
-            return parsed;
+            return InputButton.MouseBinding.LEFT;
         }
-        return KeyCode.None;
+        if (mouse.rightButton.wasPressedThisFrame)
+        {
+            return InputButton.MouseBinding.RIGHT;
+        }
+        if (mouse.middleButton.wasPressedThisFrame)
+        {
+            return InputButton.MouseBinding.MIDDLE;
+        }
+        if (mouse.forwardButton.wasPressedThisFrame)
+        {
+            return InputButton.MouseBinding.FORWARD;
+        }
+        if (mouse.backButton.wasPressedThisFrame)
+        {
+            return InputButton.MouseBinding.BACK;
+        }
+
+        return InputButton.MouseBinding.NONE;
     }
 
     /*
@@ -421,7 +393,8 @@ public class Controls : MonoBehaviour
     {
         foreach (InputButton button in Controls.Buttons)
         {
-            PlayerPrefs.SetString(button.GameButton.ToString() + "PC", button.PcButton.ToString());
+            PlayerPrefs.SetString(button.GameButton.ToString() + "PCKey", button.PcButton.ToString());
+            PlayerPrefs.SetString(button.GameButton.ToString() + "PCMouse", button.PcMouseButton.ToString());
             PlayerPrefs.SetString(button.GameButton.ToString() + "Joystick", button.JoystickButton.Button.ToString());
         }
         foreach (InputAxis axis in Controls.Axis)
@@ -440,15 +413,17 @@ public class Controls : MonoBehaviour
 
         foreach (GameButton gameButton in Enum.GetValues(typeof(GameButton)))
         {
-            string pcButton = PlayerPrefs.GetString(gameButton.ToString() + "PC", "");
+            string pcKey = PlayerPrefs.GetString(gameButton.ToString() + "PCKey", "");
+            string pcMouse = PlayerPrefs.GetString(gameButton.ToString() + "PCMouse", "");
             string joystickButton = PlayerPrefs.GetString(gameButton.ToString() + "Joystick", "");
 
-            if (pcButton != "" && joystickButton != "")
+            if (joystickButton != "" && (pcKey != "" || pcMouse != ""))
             {
-                KeyCode pcControl = (KeyCode)Enum.Parse(typeof(KeyCode), pcButton);
+                Key pcKeyControl = ParseSavedBinding<Key>(pcKey);
+                InputButton.MouseBinding pcMouseControl = ParseSavedBinding<InputButton.MouseBinding>(pcMouse);
                 GamePad.Button joystickControl = ParseSavedBinding<GamePad.Button>(joystickButton);
 
-                Controls.AssignControl(gameButton, pcControl, joystickControl);
+                Controls.AssignControl(gameButton, pcKeyControl, pcMouseControl, joystickControl);
             }
         }
         foreach (GameAxis gameAxis in Enum.GetValues(typeof(GameAxis)))
@@ -468,6 +443,11 @@ public class Controls : MonoBehaviour
 
     private static T ParseSavedBinding<T>(string value) where T : struct
     {
+        if (string.IsNullOrEmpty(value))
+        {
+            return default(T);
+        }
+
         foreach (T candidate in Enum.GetValues(typeof(T)))
         {
             if (string.Equals(candidate.ToString().Replace("_", ""), value.Replace("_", ""), StringComparison.OrdinalIgnoreCase))

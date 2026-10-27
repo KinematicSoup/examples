@@ -70,7 +70,7 @@ public class BindingsPanel : MonoBehaviour
     public void Initialize(InputButton button)
     {
         GetComponentInChildren<Text>().text = button.Name;
-        m_buttonP.GetComponentInChildren<Text>().text = button.PcButton.ToString();
+        m_buttonP.GetComponentInChildren<Text>().text = button.PcName;
         m_buttonJ.GetComponentInChildren<Text>().text = button.JoystickButton.Name;
         m_button = button;
     }

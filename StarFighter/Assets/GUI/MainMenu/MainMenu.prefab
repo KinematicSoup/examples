@@ -6289,9 +6289,10 @@ MonoBehaviour:
   ButtonBindings: {fileID: 11472256}
   BindingsMenu: {fileID: 22414544}
   RectBindings: {fileID: 22447058}
-  PanelBindingsPrefab: {fileID: 0}
+  PanelBindingsPrefab: {fileID: 22420510, guid: 1acd65a1349747c4ca2160a096b3d358,
+    type: 3}
   ScrollbarBindings: {fileID: 11456762}
-  ButtonReloadDefaults: {fileID: 0}
+  ButtonReloadDefaults: {fileID: 11450538}
   RebindMenu: {fileID: 22445686}
   ButtonRebind: {fileID: 11439664}
   TextRebind: {fileID: 11464080}

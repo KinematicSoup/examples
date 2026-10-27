@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class TurretUI : MonoBehaviour
 {
@@ -66,9 +67,10 @@ public class TurretUI : MonoBehaviour
                     m_turret.FireLaser();
                 }
 
-                turnRate.x = Input.GetAxis("Mouse X");
-                turnRate.y = Input.GetAxis("Mouse Y");
-                turnRate *= 5.0f * Settings.MouseSensitivity * m_cam.DesensitizeFactor();
+                Vector2 mouseDelta = Mouse.current != null ? Mouse.current.delta.ReadValue() : Vector2.zero;
+                turnRate.x = mouseDelta.x;
+                turnRate.y = mouseDelta.y;
+                turnRate *= Settings.MouseSensitivity * m_cam.DesensitizeFactor() / 4f;
             }
 
             if (Settings.InvertX)

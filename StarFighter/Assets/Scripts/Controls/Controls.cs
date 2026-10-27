@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
 using KS.Reactor.Client.Unity;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 /*
  * stores and maintains user constrols
@@ -275,21 +277,93 @@ public class Controls : MonoBehaviour
      */
     private static KeyCode FindKey()
     {
-        if (Input.anyKey)
+        Mouse mouse = Mouse.current;
+        if (mouse != null)
         {
-            foreach (KeyCode keyCode in Enum.GetValues(typeof(KeyCode)))
+            if (mouse.leftButton.wasPressedThisFrame)
             {
-                if (Input.GetKeyDown(keyCode) && GamePad.GetButton(keyCode) == GamePad.Button.NONE) // if the keycode does not belong to a gamepad
+                return KeyCode.Mouse0;
+            }
+            if (mouse.rightButton.wasPressedThisFrame)
+            {
+                return KeyCode.Mouse1;
+            }
+            if (mouse.middleButton.wasPressedThisFrame)
+            {
+                return KeyCode.Mouse2;
+            }
+            if (mouse.forwardButton.wasPressedThisFrame)
+            {
+                return KeyCode.Mouse3;
+            }
+            if (mouse.backButton.wasPressedThisFrame)
+            {
+                return KeyCode.Mouse4;
+            }
+        }
+
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard != null)
+        {
+            foreach (KeyControl control in keyboard.allKeys)
+            {
+                if (!control.wasPressedThisFrame)
                 {
-                    return (keyCode);
+                    continue;
+                }
+
+                KeyCode keyCode = ConvertInputSystemKeyToKeyCode(control.keyCode);
+                if (keyCode != KeyCode.None)
+                {
+                    return keyCode;
                 }
             }
-            return KeyCode.None;
         }
-        else
+
+        return KeyCode.None;
+    }
+
+    private static KeyCode ConvertInputSystemKeyToKeyCode(Key key)
+    {
+        switch (key)
         {
-            return KeyCode.None;
+            case Key.Enter: return KeyCode.Return;
+            case Key.NumpadEnter: return KeyCode.KeypadEnter;
+            case Key.LeftCtrl: return KeyCode.LeftControl;
+            case Key.RightCtrl: return KeyCode.RightControl;
+            case Key.LeftMeta: return KeyCode.LeftCommand;
+            case Key.RightMeta: return KeyCode.RightCommand;
+            case Key.Digit0: return KeyCode.Alpha0;
+            case Key.Digit1: return KeyCode.Alpha1;
+            case Key.Digit2: return KeyCode.Alpha2;
+            case Key.Digit3: return KeyCode.Alpha3;
+            case Key.Digit4: return KeyCode.Alpha4;
+            case Key.Digit5: return KeyCode.Alpha5;
+            case Key.Digit6: return KeyCode.Alpha6;
+            case Key.Digit7: return KeyCode.Alpha7;
+            case Key.Digit8: return KeyCode.Alpha8;
+            case Key.Digit9: return KeyCode.Alpha9;
+            case Key.Numpad0: return KeyCode.Keypad0;
+            case Key.Numpad1: return KeyCode.Keypad1;
+            case Key.Numpad2: return KeyCode.Keypad2;
+            case Key.Numpad3: return KeyCode.Keypad3;
+            case Key.Numpad4: return KeyCode.Keypad4;
+            case Key.Numpad5: return KeyCode.Keypad5;
+            case Key.Numpad6: return KeyCode.Keypad6;
+            case Key.Numpad7: return KeyCode.Keypad7;
+            case Key.Numpad8: return KeyCode.Keypad8;
+            case Key.Numpad9: return KeyCode.Keypad9;
+            case Key.NumLock: return KeyCode.Numlock;
+            case Key.PrintScreen: return KeyCode.Print;
+            case Key.ContextMenu: return KeyCode.Menu;
         }
+
+        KeyCode parsed;
+        if (Enum.TryParse(key.ToString(), true, out parsed))
+        {
+            return parsed;
+        }
+        return KeyCode.None;
     }
 
     /*

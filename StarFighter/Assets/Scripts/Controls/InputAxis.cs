@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using GamepadInput;
+using UnityEngine.InputSystem;
 
 /*
  * stores all the mouse and joystick axis that are relevant to a specific in game command.
@@ -100,14 +101,15 @@ public class InputAxis
 
         public static float GetAxis(Axis mouseAxis)
         {
-            //float ret = 0.0f;
             float range = 2.0f * (float)Camera.main.pixelHeight;
+            UnityEngine.InputSystem.Mouse mouse = UnityEngine.InputSystem.Mouse.current;
+            Vector2 delta = (mouse != null) ? mouse.delta.ReadValue() : Vector2.zero;
             switch (mouseAxis)
             {
-                case Axis.SCROLL_WHEEL: return Input.GetAxis("Mouse ScrollWheel") * 50;
+                case Axis.SCROLL_WHEEL: return (mouse != null ? mouse.scroll.y.ReadValue() : 0f) * 50f;
                 case Axis.MOUSE_X:
                     {
-                        float input = Input.GetAxis("Mouse X");
+                        float input = delta.x;
                         float sign = input > 0 ? 1.0f : -1.0f;
                         input *= sign;
                         m_pos.x += sign * input * 30.0f;
@@ -117,7 +119,7 @@ public class InputAxis
                     }
                 case Axis.MOUSE_Y:
                     {
-                        float input = Input.GetAxis("Mouse Y");
+                        float input = delta.y;
                         float sign = input > 0 ? 1.0f : -1.0f;
                         input *= sign;
                         m_pos.y += sign * input * 30.0f;

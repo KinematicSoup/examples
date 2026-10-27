@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour 
@@ -154,14 +155,16 @@ public class MainMenu : MonoBehaviour
         Fighter.localPosition = Vector3.SmoothDamp(Fighter.localPosition, fighterTarget, ref m_fighterVelocity, 1.0f / MenuSwitchSpeed, float.MaxValue, Time.deltaTime);
 
         // other input
-        if (!Controls.IsRebinding() && !RebindDialogue.gameObject.activeSelf && !LevelManager.IsLoading() && (Input.GetButtonDown("Submit") || Input.GetButtonDown("Cancel")))
+        bool submitPressed = IsSubmitPressed();
+        bool cancelPressed = IsCancelPressed();
+        if (!Controls.IsRebinding() && !RebindDialogue.gameObject.activeSelf && !LevelManager.IsLoading() && (submitPressed || cancelPressed))
         {
             GameObject selected_go = EventSystem.current.currentSelectedGameObject;
             if (selected_go && selected_go.GetComponent<InputField>() && selected_go.GetComponent<InputField>().isFocused)
             {
                 selected_go.GetComponent<InputField>().DeactivateInputField();
             }
-            else if (Input.GetButtonDown("Cancel"))
+            else if (cancelPressed)
             {
                 ToMainMenu();
             }
@@ -558,6 +561,30 @@ public class MainMenu : MonoBehaviour
                 RGBToHSVHelper(0f, rgbColor.r, rgbColor.g, rgbColor.b, out H, out S, out V);
             }
         }
+    }
+
+    private static bool IsSubmitPressed()
+    {
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard != null && (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame))
+        {
+            return true;
+        }
+
+        Gamepad gamepad = Gamepad.current;
+        return gamepad != null && gamepad.buttonSouth.wasPressedThisFrame;
+    }
+
+    private static bool IsCancelPressed()
+    {
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard != null && (keyboard.escapeKey.wasPressedThisFrame || keyboard.backspaceKey.wasPressedThisFrame))
+        {
+            return true;
+        }
+
+        Gamepad gamepad = Gamepad.current;
+        return gamepad != null && (gamepad.buttonEast.wasPressedThisFrame || gamepad.selectButton.wasPressedThisFrame);
     }
 
     private void RGBToHSVHelper(float offset, float dominantcolor, float colorone, float colortwo, out float H, out float S, out float V)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections;
 
 /*
@@ -11,23 +12,34 @@ namespace GamepadInput
         public enum Button { NONE, A, B, Y, X, R_SHOULDER, L_SHOULDER, R_STICK, L_STICK, BACK, START, L_TRIGGER, R_TRIGGER, DPAD_UP, DPAD_DOWN, DPAD_LEFT, DPAD_RIGHT, L_STICK_UP, L_STICK_DOWN, L_STICK_LEFT, L_STICK_RIGHT, R_STICK_UP, R_STICK_DOWN, R_STICK_LEFT, R_STICK_RIGHT }
         public enum Axis { NONE, L_STICK_X, L_STICK_Y, R_STICK_X, R_STICK_Y, DPAD_X, DPAD_Y, TRIGGERS }
 
+        private static Gamepad Current
+        {
+            get { return Gamepad.current; }
+        }
+
         public static bool GetButton(Button button)
         {
+            Gamepad gamepad = Current;
+            if (gamepad == null)
+            {
+                return false;
+            }
+
             switch (button)
             {
-                case Button.A:          return Input.GetKey(KeyCode.JoystickButton0);
-                case Button.B:          return Input.GetKey(KeyCode.JoystickButton1);
-                case Button.X:          return Input.GetKey(KeyCode.JoystickButton2);
-                case Button.Y:          return Input.GetKey(KeyCode.JoystickButton3);
-                case Button.R_SHOULDER: return Input.GetKey(KeyCode.JoystickButton5);
-                case Button.L_SHOULDER: return Input.GetKey(KeyCode.JoystickButton4);
-                case Button.BACK:       return Input.GetKey(KeyCode.JoystickButton6);
-                case Button.START:      return Input.GetKey(KeyCode.JoystickButton7);
-                case Button.L_STICK:    return Input.GetKey(KeyCode.JoystickButton8);
-                case Button.R_STICK:    return Input.GetKey(KeyCode.JoystickButton9);
+                case Button.A:          return gamepad.buttonSouth.isPressed;
+                case Button.B:          return gamepad.buttonEast.isPressed;
+                case Button.X:          return gamepad.buttonWest.isPressed;
+                case Button.Y:          return gamepad.buttonNorth.isPressed;
+                case Button.R_SHOULDER: return gamepad.rightShoulder.isPressed;
+                case Button.L_SHOULDER: return gamepad.leftShoulder.isPressed;
+                case Button.BACK:       return gamepad.selectButton.isPressed;
+                case Button.START:      return gamepad.startButton.isPressed;
+                case Button.L_STICK:    return gamepad.leftStickButton.isPressed;
+                case Button.R_STICK:    return gamepad.rightStickButton.isPressed;
 
-                case Button.L_TRIGGER:   return Input.GetAxis("TriggersL") > 0.3f;
-                case Button.R_TRIGGER:   return Input.GetAxis("TriggersR") > 0.3f;
+                case Button.L_TRIGGER:   return gamepad.leftTrigger.ReadValue() > 0.3f;
+                case Button.R_TRIGGER:   return gamepad.rightTrigger.ReadValue() > 0.3f;
                 case Button.DPAD_UP:     return GamePad.GetAxis(Axis.DPAD_Y) > 0.5f;
                 case Button.DPAD_DOWN:   return GamePad.GetAxis(Axis.DPAD_Y) < -0.5f;
                 case Button.DPAD_LEFT:   return GamePad.GetAxis(Axis.DPAD_X) < -0.5f;
@@ -46,23 +58,29 @@ namespace GamepadInput
 
         public static float GetAxis(Axis axis)
         {
+            Gamepad gamepad = Current;
+            if (gamepad == null)
+            {
+                return 0f;
+            }
+
             switch (axis)
             {
                 case Axis.DPAD_X:
-                    return Input.GetAxis("DPad_XAxis");
+                    return gamepad.dpad.x.ReadValue();
                 case Axis.DPAD_Y:
-                    return -Input.GetAxis("DPad_YAxis");
+                    return -gamepad.dpad.y.ReadValue();
                 case Axis.L_STICK_X:
-                    return Input.GetAxis("L_XAxis");
+                    return gamepad.leftStick.x.ReadValue();
                 case Axis.L_STICK_Y:
-                    return -Input.GetAxis("L_YAxis");
+                    return -gamepad.leftStick.y.ReadValue();
                 case Axis.R_STICK_X:
-                    return Input.GetAxis("R_XAxis");
+                    return gamepad.rightStick.x.ReadValue();
                 case Axis.R_STICK_Y:
-                    return -Input.GetAxis("R_YAxis");
+                    return -gamepad.rightStick.y.ReadValue();
                 case Axis.TRIGGERS:
-                    float LTrigger = Input.GetAxis("TriggersL");
-                    float RTrigger = Input.GetAxis("TriggersR");
+                    float LTrigger = gamepad.leftTrigger.ReadValue();
+                    float RTrigger = gamepad.rightTrigger.ReadValue();
                     return RTrigger - LTrigger;
             }
             return 0;

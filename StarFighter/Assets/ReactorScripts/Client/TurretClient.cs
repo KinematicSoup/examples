@@ -100,7 +100,7 @@ public class TurretClient : ksEntityScript
     public override void Detached()
     {
         Entity.OnPropertyChange[ID.PROP.TURRET.OWNER] -= ReceivePlayer;
-        if (IsOwner)
+        if (IsOwner && Camera.main != null)
         {
             Camera.main.transform.SetParent(null);
         }

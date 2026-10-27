@@ -5,6 +5,7 @@ using GamepadInput;
 using UnityEngine.UI;
 using KS.Reactor.Client.Unity;
 using KS.Reactor;
+using UnityEngine.InputSystem;
 
 public class FighterUI : MonoBehaviour
 {
@@ -154,9 +155,10 @@ public class FighterUI : MonoBehaviour
 
     private Vector2 MoveCrosshair()
     {
+        Vector2 mouseDelta = Mouse.current != null ? Mouse.current.delta.ReadValue() : Vector2.zero;
         Vector3 p = m_crosshair.transform.position;
-        p.x += 15.0f * Settings.MouseSensitivity * Input.GetAxis("Mouse X") * (Settings.InvertX ? -1f : 1f);
-        p.y += 15.0f * Settings.MouseSensitivity * Input.GetAxis("Mouse Y") * (Settings.InvertY ? -1f : 1f);
+        p.x += Settings.MouseSensitivity * mouseDelta.x * (Settings.InvertX ? -1f : 1f) * .75f;
+        p.y += Settings.MouseSensitivity * mouseDelta.y * (Settings.InvertY ? -1f : 1f) * .75f;
 
         float b = Mathf.Min(Screen.height, Screen.width) * 0.3f;
         Rect bounds = new Rect(Screen.width * 0.5f - b, Screen.height * 0.5f - b, 2.0f * b,  2.0f * b);

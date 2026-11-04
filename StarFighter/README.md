@@ -9,7 +9,6 @@ Unity version: 6.3
 ### Getting Started
 
 * Check out this project, open it in Unity 6.3.
-* Install Reactor Multiplayer Engine from [https://www.kinematicsoup.com/](https://www.kinematicsoup.com/reactor/install/)
 * Open the scene file Assets/Scenes/arena.unity
 * Go the Reactor menu, select "Rebuild All"
 * Click the `GameController` object in the hierarchy, go to the `ksRoomInfo` component, and click "Start Local Server".
